@@ -190,6 +190,24 @@
 }
 
 {
+  console.log("start");
+
+  setTimeout(() => console.log("timeout"), 0);
+
+  new Promise((res, rej) => {
+    console.log("promise constructor");
+    rej();
+  })
+    .then(() => console.log("promise"))
+    .catch(() => console.log("promise 1"))
+    .catch(() => console.log("promise 2"))
+    .then(() => console.log("promise3"))
+    .then(() => console.log("promise4"));
+
+  console.log("final");
+}
+
+{
   function promiseAll(promises) {
     const outputs = [];
     let settledPromiseCounter = 0;
