@@ -67,7 +67,15 @@ function mergeArrays({
 }
 
 // O(n3)
-// const mergeArrays = () => {
+// const mergeArrays = ({
+//   products,
+//   comments,
+//   users,
+// }: {
+//   products: Product[];
+//   users: User[];
+//   comments: CommentProduct[];
+// }) => {
 //   return products.map((product) => ({
 //     id: product.id,
 //     title: product.title,
