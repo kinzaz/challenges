@@ -119,3 +119,27 @@
   console.log(test.arrow());
   console.log(test.arrow2());
 }
+
+{
+  const userServie = {
+    currentFilter: "active",
+    users: [
+      {
+        name: "Alex",
+        status: "active",
+      },
+
+      {
+        name: "John",
+        status: "deleted",
+      },
+    ],
+    getFilteredUsers: function () {
+      return this.users.filter(function (user) {
+        return user.status === this.currentFilter;
+      });
+    },
+  };
+
+  console.log(userServie.getFilteredUsers()); // ?
+}
