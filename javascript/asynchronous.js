@@ -1014,6 +1014,14 @@
   Promise.resolve("c").then(console.log);
 
   {
-	// | a b c | 1 | 2 | 3
+    // | a b c | 1 | 2 | 3
   }
+}
+
+{
+  for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i));
+    Promise.resolve(i).then(console.log);
+  }
+  console.log(i);
 }
