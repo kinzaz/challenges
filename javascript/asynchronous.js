@@ -956,3 +956,64 @@
 
   foo();
 }
+
+{
+  console.log(1);
+
+  setTimeout(() => {
+    console.log(2);
+  }, 0);
+
+  console.log(3);
+
+  Promise.resolve().then(() => {
+    console.log(4);
+  });
+
+  console.log(5);
+
+  while ("") {
+    console.log(6);
+  }
+
+  console.log(7);
+}
+
+{
+  function func() {
+    console.log(2);
+    Promise.resolve().then(func);
+  }
+
+  func();
+}
+
+{
+  function func2() {
+    console.log(1);
+    setTimeout(func2);
+  }
+
+  func2();
+}
+
+{
+  // Написать тики event loop и порядок выполнения
+  setTimeout(() => {
+    console.log(1);
+  }, 2);
+  setTimeout(() => {
+    console.log(2);
+  }, 100);
+  setTimeout(() => {
+    console.log(3);
+  }, 10);
+
+  Promise.resolve("a").then(console.log);
+  Promise.resolve("b").then(console.log);
+  Promise.resolve("c").then(console.log);
+
+  {
+	// | a b c | 1 | 2 | 3
+  }
+}
