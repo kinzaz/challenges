@@ -1,8 +1,8 @@
 Определить приоритет стилей
 
 ```html
-<div class="”parent”">
-  <div id="”myId”" class="”class1" class2”></div>
+<div class="parent">
+  <div id="myId" class="class1 class2”></div>
 </div>
 ```
 
