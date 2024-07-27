@@ -34,3 +34,60 @@ range[Symbol.iterator] = function () {
 for (const num of range) {
   console.log(num);
 }
+
+{
+  const myObj = {
+    a: "test",
+    b: 2,
+    c: true,
+  };
+  Object.defineProperty(myObj, Symbol.iterator, {
+    enumerable: false,
+    writable: false,
+    configurable: true,
+    value: function () {
+      const o = this;
+      let idx = 0;
+      const ks = Object.keys(o);
+      return {
+        next: function () {
+          return {
+            value: o[ks[idx++]],
+            done: idx > ks.length,
+          };
+        },
+      };
+    },
+  });
+  // ручной перебор `myObj`
+  var it = myObj[Symbol.iterator]();
+  it.next(); // { value:2, done:false }
+  it.next(); // { value:3, done:false }
+  it.next(); // { value:undefined, done:true }
+  // перебор `myObj` в `for..of`
+  for (var v of myObj) {
+    console.log(v);
+  }
+}
+
+// Создать итератор, который наполняет бесконечно возвращает рандомные числа.
+// Наполнить пустой массив итерируясь по объекту с таким итератором
+// Остановить наполнение.
+{
+  const randoms = {
+    [Symbol.iterator]: function () {
+      return {
+        next() {
+          return { value: Math.random() };
+        },
+      };
+    },
+  };
+  var randoms_pool = [];
+  for (const n of randoms) {
+    randoms_pool.push(n);
+    // не продолжать бесконечно!
+    if (randoms_pool.length === 10) break;
+  }
+  console.log(randoms_pool);
+}
